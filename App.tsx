@@ -1,19 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Routes } from "./src/routes"
+import { Themer } from "./src/styles"
+import { ThemeProvider } from "styled-components"
+import AppLoading from "expo-app-loading"
+import { useFonts, OpenSans_300Light, OpenSans_400Regular, OpenSans_700Bold } from "@expo-google-fonts/open-sans"
 
-export default function App() {
+const App = () => {
+  const [fontsloaded] = useFonts({
+    OpenSans_300Light,
+    OpenSans_400Regular,
+    OpenSans_700Bold 
+  })
+
+  if (!fontsloaded) {
+    return <AppLoading />
+  }
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
+    <ThemeProvider theme={Themer}>
+        <Routes />
+    </ThemeProvider>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
