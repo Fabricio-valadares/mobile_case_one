@@ -1,0 +1,12 @@
+{
+  "name": "mobile_case_one",
+  "displayName": "mobile_case_one",
+  "expo": {
+    "name": "mobile_case_one",
+    "slug": "mobile_case_one",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
