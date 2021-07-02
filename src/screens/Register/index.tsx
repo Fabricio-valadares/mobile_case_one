@@ -1,5 +1,5 @@
-import React from "react";
-import { KeyboardAvoidingView, Platform } from "react-native";
+import React, { useEffect, useContext } from "react";
+import { KeyboardAvoidingView, Platform, Text } from "react-native";
 import {
   Container,
   ViewInput,
@@ -12,8 +12,48 @@ import {
   ViewText,
   TextFinal,
 } from "./style";
+import { AuthContext } from "../../provider/Auth";
+import { api } from "../../services";
+import { IDataUserNew } from "./dtos";
+import { useForm, Controller } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const Register = ({ navigation }: any) => {
+  const schema = yup.object().shape({
+    name: yup.string().required("Campo Obrigatório"),
+    email: yup.string().required("Campo Obrigatório"),
+    password: yup.string().required("Campo Obrigatório"),
+    confirmationPassword: yup
+      .string()
+      .oneOf([yup.ref("password")], "Senha não compativel")
+      .required("Campo Obrigatório"),
+  });
+
+  const {
+    handleSubmit,
+    formState: { errors },
+    reset,
+    control,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const handleSubmitForm = (data: IDataUserNew) => {
+    reset();
+
+    const dataFinal = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    };
+
+    api
+      .post("/register", dataFinal)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  };
+
   return (
     <Container>
       <KeyboardAvoidingView
@@ -22,19 +62,63 @@ const Register = ({ navigation }: any) => {
       >
         <Title>CADASTRE-SE</Title>
         <Form>
-          <ViewInput>
-            <Input placeholder="Name"></Input>
-          </ViewInput>
-          <ViewInput>
-            <Input placeholder="E-mail/CPF"></Input>
-          </ViewInput>
-          <ViewInput>
-            <Input placeholder="Senha"></Input>
-          </ViewInput>
-          <ViewInput>
-            <Input placeholder="Confirmar senha"></Input>
-          </ViewInput>
-          <ButtonStyles activeOpacity={0.9}>
+          <Controller
+            name="name"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <ViewInput>
+                <Input
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Name"
+                ></Input>
+              </ViewInput>
+            )}
+          />
+          <Controller
+            name="email"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <ViewInput>
+                <Input
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="E-mail/CPF"
+                ></Input>
+              </ViewInput>
+            )}
+          />
+          <Controller
+            name="password"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <ViewInput>
+                <Input
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Senha"
+                ></Input>
+              </ViewInput>
+            )}
+          />
+          <Controller
+            name="confirmpassword"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <ViewInput>
+                <Input
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Confirmar senha"
+                ></Input>
+              </ViewInput>
+            )}
+          />
+          <Text>{errors.confirmpassword?.message}</Text>
+          <ButtonStyles
+            onPress={handleSubmit(handleSubmitForm)}
+            activeOpacity={0.9}
+          >
             <TextButton>CADASTRAR</TextButton>
           </ButtonStyles>
         </Form>

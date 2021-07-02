@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Container,
   ViewLogout,
@@ -15,13 +15,38 @@ import {
   Icon,
   ViewTextButton,
 } from "./style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../../provider/Auth";
+import jwt_decode from "jwt-decode";
+import { api } from "../../services";
+import { IDataUser } from "./dtos";
+import { DataUserContext } from "../../provider/DataUser";
 
 const Dashboard = ({ navigation }: any) => {
+  const { auth, setAuth } = useContext(AuthContext);
+  const { dataUser, setDataUser } = useContext(DataUserContext);
+
+  const logoutUser = async (): Promise<void> => {
+    await AsyncStorage.clear();
+    setAuth("");
+  };
+
+  useEffect(() => {
+    api
+      .get("/user/listone", {
+        headers: { Authorization: `Bearer ${auth}` },
+      })
+      .then((response) => {
+        setDataUser(response.data.user);
+      })
+      .catch((error) => console.log(error));
+  }, [auth, dataUser]);
+
   return (
     <Container>
       <ViewLogout>
-        <Logout onPress={() => navigation.navigate("login")}>Logout</Logout>
-        <Icon onPress={() => navigation.navigate("login")} name="arrow-left" />
+        <Logout onPress={logoutUser}>Logout</Logout>
+        <Icon onPress={logoutUser} name="arrow-left" />
       </ViewLogout>
       <Content>
         <ViewTextInButton>
@@ -34,9 +59,9 @@ const Dashboard = ({ navigation }: any) => {
           </ViewImage>
           <ViewTextButton>
             <Welcome>
-              Bem vindo, <NameUser>nome</NameUser>
+              Bem vindo, <NameUser>{dataUser.name}</NameUser>
             </Welcome>
-            <TextEmail>exemplo@exemplo.com.br</TextEmail>
+            <TextEmail>{dataUser.email}</TextEmail>
             <ButtonStyled>
               <TextButton onPress={() => navigation.navigate("updateUser")}>
                 Editar perfil

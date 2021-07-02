@@ -13,8 +13,39 @@ import {
   TextFinal,
   ViewTitle,
 } from "./style";
+import { useForm, Controller } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { IDataUserForgot } from "./dtos";
+import { api } from "../../services";
 
 const Forgot = ({ navigation }: any) => {
+  const schema = yup.object().shape({
+    email: yup.string(),
+  });
+
+  const {
+    handleSubmit,
+    formState: { errors },
+    reset,
+    control,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const handleSubmitForm = (data: IDataUserForgot) => {
+    reset();
+
+    console.log("Uva", data);
+
+    api
+      .post("/user/forgot", data)
+      .then((response) => {
+        console.log("galinha", response);
+      })
+      .catch((error) => console.log("Muitos Ovos", error));
+  };
+
   return (
     <Container>
       <KeyboardAvoidingView
@@ -26,10 +57,24 @@ const Forgot = ({ navigation }: any) => {
         </ViewTitle>
 
         <Form>
-          <ViewInput>
-            <Input placeholder="E-mail"></Input>
-          </ViewInput>
-          <ButtonStyles activeOpacity={0.9}>
+          <Controller
+            name="email"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <ViewInput>
+                <Input
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="E-mail"
+                ></Input>
+              </ViewInput>
+            )}
+          />
+
+          <ButtonStyles
+            onPress={handleSubmit(handleSubmitForm)}
+            activeOpacity={0.9}
+          >
             <TextButton>ENVIAR CÓDIGO</TextButton>
           </ButtonStyles>
         </Form>
