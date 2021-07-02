@@ -24,7 +24,7 @@ const Register = ({ navigation }: any) => {
     name: yup.string().required("Campo Obrigatório"),
     email: yup.string().required("Campo Obrigatório"),
     password: yup.string().required("Campo Obrigatório"),
-    confirmationPassword: yup
+    confirmpassword: yup
       .string()
       .oneOf([yup.ref("password")], "Senha não compativel")
       .required("Campo Obrigatório"),
@@ -42,10 +42,12 @@ const Register = ({ navigation }: any) => {
   const handleSubmitForm = (data: IDataUserNew) => {
     reset();
 
+    console.log("Registe oba oba !");
+
     const dataFinal = {
-      name: data.name,
-      email: data.email,
-      password: data.password,
+      name: data.name.trim(),
+      email: data.email.trim(),
+      password: data.password.trim(),
     };
 
     api
@@ -114,7 +116,6 @@ const Register = ({ navigation }: any) => {
               </ViewInput>
             )}
           />
-          <Text>{errors.confirmpassword?.message}</Text>
           <ButtonStyles
             onPress={handleSubmit(handleSubmitForm)}
             activeOpacity={0.9}

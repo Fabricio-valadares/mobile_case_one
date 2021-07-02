@@ -49,9 +49,9 @@ const UpdateUser = ({ navigation }: any) => {
     const { sub } = jwt_decode<IDataId>(auth);
 
     const dataFinal = {
-      name: data.name,
-      email: data.email,
-      password: data.password,
+      name: data.name.trim(),
+      email: data.email.trim(),
+      password: data.password.trim(),
     };
 
     api

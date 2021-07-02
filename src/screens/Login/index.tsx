@@ -42,8 +42,13 @@ const Login = ({ navigation }: any) => {
   const handleSubmitForm = (data: IDataForm) => {
     reset();
 
+    const dataFinal = {
+      email: data.email.trim(),
+      password: data.password.trim(),
+    };
+
     api
-      .post("/login", data)
+      .post("/login", dataFinal)
       .then((response) => {
         AsyncStorage.setItem(
           "@mind/mobile",

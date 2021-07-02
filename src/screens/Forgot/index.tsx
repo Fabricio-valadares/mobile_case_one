@@ -36,10 +36,12 @@ const Forgot = ({ navigation }: any) => {
   const handleSubmitForm = (data: IDataUserForgot) => {
     reset();
 
-    console.log("Uva", data);
+    const dataFinal = {
+      email: data.email.trim(),
+    };
 
     api
-      .post("/user/forgot", data)
+      .post("/user/forgot", dataFinal)
       .then((response) => {
         console.log("galinha", response);
       })
