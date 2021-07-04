@@ -22,10 +22,7 @@ import { api } from "../../services";
 
 const Forgot = ({ navigation }: any) => {
   const schema = yup.object().shape({
-    email: yup
-      .string()
-      .email("Não e um formato de e-mail")
-      .required("Campo Obrigatório"),
+    email: yup.string().required("Campo Obrigatório"),
   });
 
   const {
