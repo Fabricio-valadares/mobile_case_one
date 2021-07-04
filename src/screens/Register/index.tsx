@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, Text, ScrollView } from "react-native";
 import {
   Container,
@@ -13,7 +13,6 @@ import {
   TextFinal,
   TextError,
 } from "./style";
-import { AuthContext } from "../../provider/Auth";
 import { api } from "../../services";
 import { IDataUserNew } from "./dtos";
 import { useForm, Controller } from "react-hook-form";
@@ -59,7 +58,6 @@ const Register = ({ navigation }: any) => {
         .post("/register", dataFinal)
         .then((response) => {
           navigation.navigate("login");
-          console.log(response);
         })
         .catch((error) => console.log(error));
     }

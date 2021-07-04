@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { createContext, useState } from "react";
-import { IChildren, IDataAuth, IDataUser } from "../dtos";
+import { IChildren, IDataAuth } from "../dtos";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext<IDataAuth>({} as IDataAuth);

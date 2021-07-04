@@ -12,6 +12,7 @@ import {
   ViewText,
   TextFinal,
   ViewTitle,
+  TextError,
 } from "./style";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
@@ -21,7 +22,10 @@ import { api } from "../../services";
 
 const Forgot = ({ navigation }: any) => {
   const schema = yup.object().shape({
-    email: yup.string(),
+    email: yup
+      .string()
+      .email("Não e um formato de e-mail")
+      .required("Campo Obrigatório"),
   });
 
   const {
@@ -72,7 +76,7 @@ const Forgot = ({ navigation }: any) => {
               </ViewInput>
             )}
           />
-
+          <TextError>{errors.email?.message}</TextError>
           <ButtonStyles
             onPress={handleSubmit(handleSubmitForm)}
             activeOpacity={0.9}

@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 export const Container = styled.View`
   flex: 1;
@@ -37,10 +37,6 @@ export const Input = styled.TextInput`
   padding: 20px;
   margin: 5px 0 10px 0;
   background-color: #fafafa;
-`;
-
-export const ViewInput = styled.View`
-  width: 100%;
 `;
 
 export const ButtonStyles = styled.TouchableOpacity`

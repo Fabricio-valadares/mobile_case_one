@@ -1,8 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { KeyboardAvoidingView, Platform, Alert } from "react-native";
 import {
   Container,
-  ViewInput,
   Title,
   TextRegister,
   TextButton,
@@ -43,8 +42,6 @@ const Login = ({ navigation }: any) => {
   const handleSubmitForm = (data: IDataForm) => {
     reset();
 
-    console.log(data);
-
     const dataFinal = {
       emailOrCPF: data.emailOrCPF.trim(),
       password: data.password.trim(),
@@ -57,7 +54,6 @@ const Login = ({ navigation }: any) => {
           "@mind/mobile",
           JSON.stringify(response.data.token)
         );
-        console.log("res", response);
         setAuth(response.data.token);
       })
       .catch((error) => {

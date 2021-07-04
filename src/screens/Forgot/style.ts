@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 export const Container = styled.View`
   flex: 1;
@@ -30,6 +30,12 @@ export const Input = styled.TextInput`
 `;
 
 export const ViewInput = styled.View`
+  width: 100%;
+`;
+
+export const TextError = styled.Text`
+  color: ${({ theme }) => theme.colors.textSecondary};
+  text-align: left;
   width: 100%;
 `;
 

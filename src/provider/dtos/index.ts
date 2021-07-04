@@ -9,11 +9,6 @@ export interface IDataAuth {
   setAuth: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export interface IDataUser {
-  auth: string;
-  setAuth: React.Dispatch<React.SetStateAction<string>>;
-}
-
 export interface IDataUserContext {
   dataUser: IDataUserUpdate;
   setDataUser: React.Dispatch<React.SetStateAction<IDataUserUpdate>>;

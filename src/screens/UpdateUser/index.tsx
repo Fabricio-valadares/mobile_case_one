@@ -76,10 +76,7 @@ const UpdateUser = ({ navigation }: any) => {
         })
         .then((response) => {
           navigation.navigate("dashboard");
-          console.log("response");
-
           setDataUser(response.data);
-          console.log(response);
         })
         .catch((error) => console.log(error));
     }

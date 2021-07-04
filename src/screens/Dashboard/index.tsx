@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Container,
   ViewLogout,
@@ -17,9 +17,7 @@ import {
 } from "./style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../../provider/Auth";
-import jwt_decode from "jwt-decode";
 import { api } from "../../services";
-import { IDataUser } from "./dtos";
 import { DataUserContext } from "../../provider/DataUser";
 
 const Dashboard = ({ navigation }: any) => {
