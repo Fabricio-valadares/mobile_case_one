@@ -20,6 +20,12 @@ export const SubTitle = styled.Text`
   margin-bottom: 50px;
 `;
 
+export const TextError = styled.Text`
+  color: ${({ theme }) => theme.colors.textSecondary};
+  text-align: left;
+  width: 100%;
+`;
+
 export const Form = styled.View`
   width: 80%;
   align-items: center;
@@ -29,7 +35,7 @@ export const Form = styled.View`
 export const Input = styled.TextInput`
   width: 100%;
   padding: 20px;
-  margin-bottom: 10px;
+  margin: 5px 0 10px 0;
   background-color: #fafafa;
 `;
 

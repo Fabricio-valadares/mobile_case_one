@@ -5,10 +5,12 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  padding: 35px 30px 30px 30px;
   font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
 export const Title = styled.Text`
+  text-align: center;
   color: ${({ theme }) => theme.colors.text};
   font-size: ${RFPercentage(5.5)}px;
   margin-bottom: 15px;
@@ -16,7 +18,7 @@ export const Title = styled.Text`
 `;
 
 export const Form = styled.View`
-  width: 80%;
+  width: 100%;
   margin-top: 30px;
   align-items: center;
   justify-content: center;
@@ -43,11 +45,22 @@ export const ButtonStyles = styled.TouchableOpacity`
   margin: 20px 0;
 `;
 
-export const ViewText = styled.View``;
+export const ViewText = styled.View`
+  width: 100%;
+  align-items: center;
+`;
 
-export const TextFinal = styled.Text``;
+export const TextError = styled.Text`
+  color: ${({ theme }) => theme.colors.textSecondary};
+  width: 100%;
+`;
+
+export const TextFinal = styled.Text`
+  text-align: left;
+`;
 
 export const TextRegister = styled.Text`
+  text-align: center;
   color: ${({ theme }) => theme.colors.secondary};
 `;
 

@@ -43,7 +43,7 @@ const Forgot = ({ navigation }: any) => {
     api
       .post("/user/forgot", dataFinal)
       .then((response) => {
-        console.log("galinha", response);
+        navigation.navigate("login");
       })
       .catch((error) => console.log("Muitos Ovos", error));
   };

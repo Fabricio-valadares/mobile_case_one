@@ -3,8 +3,10 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled.View`
   flex: 1;
+  width: 100%;
   align-items: center;
   justify-content: center;
+  padding: 35px 30px 30px 30px;
   font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
@@ -12,14 +14,15 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.text};
   font-size: ${RFPercentage(5.5)}px;
   margin-bottom: 15px;
+  text-align: center;
   font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
 export const Form = styled.View`
-  width: 80%;
+  width: 100%;
   margin-top: 30px;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
 `;
 
 export const Input = styled.TextInput`
@@ -54,4 +57,10 @@ export const TextRegister = styled.Text`
 export const TextButton = styled.Text`
   color: #fff;
   font-size: 17px;
+`;
+
+export const TextError = styled.Text`
+  color: ${({ theme }) => theme.colors.textSecondary};
+  text-align: left;
+  width: 100%;
 `;

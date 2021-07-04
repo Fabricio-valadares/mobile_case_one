@@ -13,6 +13,7 @@ import {
   ViewText,
   TextFinal,
   ForgotPassword,
+  TextError,
 } from "./style";
 import { AuthContext } from "../../provider/Auth";
 import { useForm, Controller } from "react-hook-form";
@@ -26,7 +27,7 @@ const Login = ({ navigation }: any) => {
   const { setAuth } = useContext(AuthContext);
 
   const schema = yup.object().shape({
-    email: yup.string().required("Campo Obrigatório"),
+    emailOrCPF: yup.string().required("Campo Obrigatório"),
     password: yup.string().required("Campo Obrigatório"),
   });
 
@@ -42,8 +43,10 @@ const Login = ({ navigation }: any) => {
   const handleSubmitForm = (data: IDataForm) => {
     reset();
 
+    console.log(data);
+
     const dataFinal = {
-      email: data.email.trim(),
+      emailOrCPF: data.emailOrCPF.trim(),
       password: data.password.trim(),
     };
 
@@ -54,6 +57,7 @@ const Login = ({ navigation }: any) => {
           "@mind/mobile",
           JSON.stringify(response.data.token)
         );
+        console.log("res", response);
         setAuth(response.data.token);
       })
       .catch((error) => {
@@ -73,7 +77,7 @@ const Login = ({ navigation }: any) => {
 
         <Form>
           <Controller
-            name="email"
+            name="emailOrCPF"
             control={control}
             render={({ field: { onChange, value } }) => (
               <>
@@ -85,6 +89,7 @@ const Login = ({ navigation }: any) => {
               </>
             )}
           />
+          <TextError>{errors.emailOrCPF?.message}</TextError>
           <Controller
             name="password"
             control={control}
@@ -98,6 +103,7 @@ const Login = ({ navigation }: any) => {
               </>
             )}
           />
+          <TextError>{errors.password?.message}</TextError>
           <ButtonStyles
             onPress={handleSubmit(handleSubmitForm)}
             activeOpacity={0.9}

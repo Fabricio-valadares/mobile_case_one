@@ -23,7 +23,3 @@ export interface IDataUserUpdate {
   name: string;
   email: string;
 }
-
-export interface IDataUser {
-  token: string;
-}

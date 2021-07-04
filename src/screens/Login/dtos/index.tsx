@@ -1,4 +1,4 @@
 export interface IDataForm {
-  email: string;
+  emailOrCPF: string;
   password: string;
 }
